@@ -1,32 +1,17 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.myapplication.bluetooth.BluetoothService;
-import com.example.myapplication.bluetooth.PrinterCommand;
-
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;s
 import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +19,6 @@ import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
 
-import static com.example.myapplication.BuildConfig.DEBUG;
 import static com.example.myapplication.MainActivity.FORTUNE;
 
 public class FortuneActivity extends AppCompatActivity {
@@ -54,32 +38,19 @@ public class FortuneActivity extends AppCompatActivity {
     int readBufferPosition;
     volatile boolean stopWorker;
 
+    //For debugging bluetooth states
     TextView myLabel;
-    Button sendButton;
-
-    @SuppressLint("HandlerLeak")
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            switch (msg.arg1) {
-                case BluetoothService.STATE_CONNECTED:
-                    break;
-            }
-        }
-    };
+    String fortune;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fortune);
         Intent intent = getIntent();
-        String fortune = intent.getStringExtra(FORTUNE);
+        fortune = intent.getStringExtra(FORTUNE);
         TextView textView = findViewById(R.id.FortuneTextView);
         myLabel = (TextView) findViewById(R.id.label);
-        sendButton= (Button) findViewById(R.id.send);
         textView.setText(fortune);
-
 
         try {
             // more codes will be here
@@ -88,27 +59,11 @@ public class FortuneActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        // send data typed by the user to be printed
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try {
-                    sendData();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
     }
 
-    private void sendData() throws IOException{
+    private void sendData(String message) throws IOException {
         try {
-
-            // the text typed by the user
-            String msg = "to print";
-            msg += "\n";
-
+            String msg = message + "\n";
             mmOutputStream.write(msg.getBytes());
 
             // tell the user data were sent
@@ -124,15 +79,7 @@ public class FortuneActivity extends AppCompatActivity {
 
     private void openBT() {
         try {
-
-            // Standard SerialPortService ID
-
-//            UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
             mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
-//            mmSocket.getInputStream().close();
-//            mmSocket.getOutputStream().close();
-//            mmSocket.close();
-
             mmSocket.connect();
             mmOutputStream = mmSocket.getOutputStream();
             mmInputStream = mmSocket.getInputStream();
@@ -239,7 +186,6 @@ public class FortuneActivity extends AppCompatActivity {
                 for (BluetoothDevice device : pairedDevices) {
 
                     Log.e("DEVICE NAME", device.getName());
-
                     // RPP300 is the name of the bluetooth printer device
                     // we got this name from the list of paired devices
                     if (device.getName().contains("BlueTooth Printer")) {
@@ -260,13 +206,15 @@ public class FortuneActivity extends AppCompatActivity {
 
     public void toPrint(View view) {
         Context context = getApplicationContext();
-        CharSequence text = "Hello toast!";
+        CharSequence text = "Printing in progress...";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-//        Print_Test();
+        try {
+            sendData(fortune);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-
 }
