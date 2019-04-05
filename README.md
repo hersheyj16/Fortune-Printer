@@ -7,10 +7,11 @@ This is a fortune teller that tells you fortune and prints it on a receipt paper
 * Open this in android studio
 * Run
 
-<img src="https://scontent-sea1-1.cdninstagram.com/vp/aa837be02cc4ccee554f0bc1123b832c/5D433747/t51.2885-15/e35/54800715_127098091778810_7494116668954642908_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com" alt="Your image title" width="250"/>
 
-
-![Image of demo](./images/demo.png) 
+## Screen Shots
+ <p align="center"> 
+    <img src="./images/demo.png" alt="Demo">
+ </p>
 
 ## Sources that I've learnedfrom from
 
@@ -23,3 +24,6 @@ This is a fortune teller that tells you fortune and prints it on a receipt paper
 
 * The printer I bought from amazon: 
   * https://www.amazon.com/Thermal-Receipt-MUNBYN-Compatible-Business/dp/B0753B5KYG/ref=sr_1_4?crid=146X1JQQRB48R&keywords=munbyn&qid=1554498030&s=gateway&sprefix=munby%2Caps%2C181&sr=8-4
+<p align="center">
+ <img src="https://scontent-sea1-1.cdninstagram.com/vp/aa837be02cc4ccee554f0bc1123b832c/5D433747/t51.2885-15/e35/54800715_127098091778810_7494116668954642908_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com" alt="Your image title" width="300"/>
+</p>
