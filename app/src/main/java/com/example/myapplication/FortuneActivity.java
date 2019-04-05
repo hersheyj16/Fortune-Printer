@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;s
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +22,6 @@ import java.util.UUID;
 import static com.example.myapplication.MainActivity.FORTUNE;
 
 public class FortuneActivity extends AppCompatActivity {
-
 
     // android built in classes for bluetooth operations
     BluetoothAdapter mBluetoothAdapter;
@@ -67,7 +66,7 @@ public class FortuneActivity extends AppCompatActivity {
             mmOutputStream.write(msg.getBytes());
 
             // tell the user data were sent
-            myLabel.setText("Data sent.");
+            myLabel.setText("Data sent to printer.");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -214,6 +213,32 @@ public class FortuneActivity extends AppCompatActivity {
         try {
             sendData(fortune);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void toClose(View view){
+        Context context = getApplicationContext();
+        CharSequence text = "Closing bluetooth connection...";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        try {
+            closeBT();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void closeBT() throws IOException{
+        try {
+            stopWorker = true;
+            mmOutputStream.close();
+            mmInputStream.close();
+            mmSocket.close();
+            myLabel.setText("Bluetooth Closed");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

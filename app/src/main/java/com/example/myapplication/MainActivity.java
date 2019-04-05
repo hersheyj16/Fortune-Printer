@@ -8,7 +8,7 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     public static final String FORTUNE = "Fortune";
-    public static final String FORTUNE_VAL = "Today Tiggs wrote a resume. And he is a great tiger.";
+//    public static final String FORTUNE_VAL = "Today Tiggs wrote a resume. And he is a great tiger.";
 
 
     @Override
@@ -19,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getFortune(View view) {
         Intent intent = new Intent(this, FortuneActivity.class);
-        intent.putExtra(FORTUNE, FORTUNE_VAL);
+        FortuneTeller ft = new FortuneTeller();
+        String fortune = ft.getFortune();
+        intent.putExtra(FORTUNE, fortune);
         startActivity(intent);
     }
 }
