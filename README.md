@@ -7,7 +7,10 @@ This is a fortune teller that tells you fortune and prints it on a receipt paper
 * Open this in android studio
 * Run
 
-![Image of demo](https://scontent-sea1-1.cdninstagram.com/vp/aa837be02cc4ccee554f0bc1123b832c/5D433747/t51.2885-15/e35/54800715_127098091778810_7494116668954642908_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com) {:height="50%" width="50%"}
+<img src="https://scontent-sea1-1.cdninstagram.com/vp/aa837be02cc4ccee554f0bc1123b832c/5D433747/t51.2885-15/e35/54800715_127098091778810_7494116668954642908_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com" alt="Your image title" width="250"/>
+
+
+![Image of demo](./images/demo.png) 
 
 ## Sources that I've learnedfrom from
 
